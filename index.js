@@ -12,6 +12,14 @@ class Teammate {
 }
 
 // creates an Engineer class off of the Teammate class
+class Manager extends Teammate {
+    constructor(teamMember, id, email, office) {
+        super(teamMember, id, email);
+        this.office = office;
+    }
+}
+
+// creates an Engineer class off of the Teammate class
 class Engineer extends Teammate {
     constructor(teamMember, id, email, github) {
         super(teamMember, id, email);
@@ -26,3 +34,63 @@ class Intern extends Teammate {
         this.school = school;
     }
 }
+
+// // TODO: Create a function to write HTML file
+// function writeToFile(fileName, data) {
+//     fs.writeFileSync(`team.html`, data);
+// }
+
+function createManager() {
+    inquirer.prompt([
+        {
+            type:'input',
+            message:"What is your manager's name?",
+            name:'managerName'
+        },
+        {
+            type:'input',
+            message:"What is your manager's ID?",
+            name:'managerID'
+        },
+        {
+            type:'input',
+            message:"What is your manager's email address?",
+            name:'managerEmail'
+        },
+        {
+            type:'input',
+            message:"What is your manager's office number?",
+            name:'managerOffice'
+        }
+    ])
+    .then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOffice);
+        anotherOne();
+    });
+}
+
+function anotherOne() {
+    inquirer.prompt([
+        {
+            type:'list',
+            message: 'Would you like to add an engineer, intern, or call it quits?',
+            name: 'menu',
+            choices: ['Add engineer', 'Add intern', 'The whole gang is here']
+        }
+    ])
+    .then(answers => {
+        if (answers.menu === 'The whole gang is here') {
+            writeHTML();
+        }
+        else if (answers.menu === 'Add engineer') {
+            addEngineer();
+        }
+        else {addIntern()};
+    })
+}
+
+function init() {
+    createManager();
+}
+
+init()
