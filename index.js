@@ -2,6 +2,8 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+const team = [];
+
 // creates an overarching team member class
 class Teammate {
     constructor(teamMember, id, email){
@@ -65,6 +67,7 @@ function createManager() {
     ])
     .then(answers => {
         const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOffice);
+        team.push(manager);
         anotherOne();
     });
 }
@@ -86,6 +89,36 @@ function anotherOne() {
             addEngineer();
         }
         else {addIntern()};
+    })
+}
+
+function addEngineer() {
+    inquirer.prompt([
+        {
+            type:'input',
+            message: "What is your engineer's name",
+            name: 'engineerName'
+        },
+        {
+            type:'input',
+            message: "What is your engineer's ID",
+            name: 'engineerID'
+        },
+        {
+            type:'input',
+            message: "What is your engineer's email",
+            name: 'engineerEmail'
+        },
+        {
+            type:'input',
+            message: "What is your engineer's github",
+            name: 'engineerGit'
+        },
+    ])
+    .then(answers => {
+        const engineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGit);
+        team.push(engineer);
+        anotherOne();
     })
 }
 
