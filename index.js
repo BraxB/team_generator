@@ -19,6 +19,18 @@ class Manager extends Teammate {
         super(teamMember, id, email);
         this.office = office;
     }
+
+    getHTML() {
+        return `
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Manager</h5>
+        <p class="card-text">${this.teamMember} ${this.id}</p>
+        <p class="card-text">${this.office}</p>
+        <a href="mailto:${this.email}" class="btn btn-primary">Email</a>
+    </div>
+</div>`
+    }
 }
 
 // creates an Engineer class off of the Teammate class
@@ -26,6 +38,18 @@ class Engineer extends Teammate {
     constructor(teamMember, id, email, github) {
         super(teamMember, id, email);
         this.github = github;
+    }
+
+    getHTML() {
+        return `
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Engineer</h5>
+        <p class="card-text">${this.teamMember} ${this.id}</p>
+        <a href="www.github.com/${this.github}" class="btn btn-primary">GitHub</a>
+        <a href="mailto:${this.email}" class="btn btn-primary">Email</a>
+    </div>
+</div>`
     }
 }
 
@@ -35,12 +59,24 @@ class Intern extends Teammate {
         super(teamMember, id, email);
         this.school = school;
     }
+
+    getHTML() {
+        return `
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Intern</h5>
+            <p class="card-text">${this.teamMember} ${this.id}</p>
+            <p class="card-text">${this.school}</p>
+            <a href="mailto:${this.email}" class="btn btn-primary">Email</a>
+        </div>
+    </div>`
+    }
 }
 
 // // TODO: Create a function to write HTML file
-// function writeToFile(fileName, data) {
-//     fs.writeFileSync(`team.html`, data);
-// }
+function writeHTML(fileName, data) {
+    fs.writeFileSync(`team.html`, data);
+}
 
 function createManager() {
     inquirer.prompt([
@@ -83,7 +119,7 @@ function anotherOne() {
     ])
     .then(answers => {
         if (answers.menu === 'The whole gang is here') {
-            writeHTML();
+            console.log(team[1].getHTML());
         }
         else if (answers.menu === 'Add engineer') {
             addEngineer();
@@ -127,7 +163,7 @@ function addIntern() {
         {
             type:'input',
             message: "What is your intern's name",
-            name: 'engineerName'
+            name: 'internName'
         },
         {
             type:'input',
@@ -146,7 +182,7 @@ function addIntern() {
         },
     ])
     .then(answers => {
-        const intern = new Intern(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGit);
+        const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internGit);
         team.push(intern);
         anotherOne();
     })
