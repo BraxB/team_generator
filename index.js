@@ -122,6 +122,36 @@ function addEngineer() {
     })
 }
 
+function addIntern() {
+    inquirer.prompt([
+        {
+            type:'input',
+            message: "What is your intern's name",
+            name: 'engineerName'
+        },
+        {
+            type:'input',
+            message: "What is your intern's ID",
+            name: 'internID'
+        },
+        {
+            type:'input',
+            message: "What is your intern's email",
+            name: 'internEmail'
+        },
+        {
+            type:'input',
+            message: "What is your intern's school",
+            name: 'internSchool'
+        },
+    ])
+    .then(answers => {
+        const intern = new Intern(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGit);
+        team.push(intern);
+        anotherOne();
+    })
+}
+
 function init() {
     createManager();
 }
