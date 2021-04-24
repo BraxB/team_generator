@@ -38,11 +38,12 @@ class Manager extends Employee {
 
     getHTML() {
         return `
-<div class="card" style="width: 18rem;">
+<div class="card mx-2 my-2" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">Manager</h5>
-        <p class="card-text">${this.teamMember} ${this.id}</p>
-        <p class="card-text">${this.office}</p>
+        <p class="card-text">Name: ${this.teamMember}</p>
+        <p class="card-text">ID: ${this.id}</p>
+        <p class="card-text">Office: ${this.office}</p>
         <a href="mailto:${this.email}" class="btn btn-primary">Email</a>
     </div>
 </div>`
@@ -66,11 +67,12 @@ class Engineer extends Employee {
 
     getHTML() {
         return `
-<div class="card" style="width: 18rem;">
+<div class="card mx-2 my-2" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">Engineer</h5>
-        <p class="card-text">${this.teamMember} ${this.id}</p>
-        <a href="www.github.com/${this.github}" class="btn btn-primary">GitHub</a>
+        <p class="card-text">Name: ${this.teamMember}</p>
+        <p class="card-text">ID: ${this.id}</p>
+        <a href="https://github.com/${this.github}" class="btn btn-primary">GitHub</a>
         <a href="mailto:${this.email}" class="btn btn-primary">Email</a>
     </div>
 </div>`
@@ -94,11 +96,12 @@ class Intern extends Employee {
 
     getHTML() {
         return `
-<div class="card" style="width: 18rem;">
+<div class="card mx-2 my-2" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">Intern</h5>
-            <p class="card-text">${this.teamMember} ${this.id}</p>
-            <p class="card-text">${this.school}</p>
+            <p class="card-text">Name: ${this.teamMember}</p>
+            <p class="card-text">ID: ${this.id}</p>
+            <p class="card-text">School: ${this.school}</p>
             <a href="mailto:${this.email}" class="btn btn-primary">Email</a>
         </div>
     </div>`
@@ -107,7 +110,7 @@ class Intern extends Employee {
 
 // // TODO: Create a function to write HTML file
 function writeHTML(fileName, data) {
-    fs.writeFileSync(`team.html`, data);
+    fs.writeFileSync(fileName, data);
 }
 
 //function to ask prompts that will create an manager
@@ -153,7 +156,34 @@ function anotherOne() {
     ])
     .then(answers => {
         if (answers.menu === 'The whole gang is here') {
-            console.log(team[1].getHTML());
+            let teamHTML = team.map(teamMember => {return teamMember.getHTML()});
+            formattedHTML = teamHTML.join("");
+            let fileName = 'Team.html';
+            let data = `
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+            <script src= "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"> </script> 
+            <script src= "https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"> </script>
+            <title>Team</title>
+            <meta name="description" content="My Team" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+            <div class="jumbotron jumbotron-fluid" style="background-color: blue; color: white; padding: 1rem">
+                <div class="container">
+                    <h1 class="display-4" style="text-align: center">My Team</h1>
+                </div>
+            </div>
+            <div class="container" style="display: flex">
+                ${formattedHTML}
+            </div>
+        </body>
+    </html>`
+            writeHTML(fileName, data)
         }
         else if (answers.menu === 'Add engineer') {
             addEngineer();
@@ -218,7 +248,7 @@ function addIntern() {
         },
     ])
     .then(answers => {
-        const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internGit);
+        const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool);
         team.push(intern);
         anotherOne();
     })
