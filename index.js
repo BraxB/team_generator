@@ -4,20 +4,36 @@ const inquirer = require('inquirer');
 
 const team = [];
 
-// creates an overarching team member class
-class Teammate {
+// creates an overarching employee class
+class Employee {
     constructor(teamMember, id, email){
         this.teamMember = teamMember;
         this.id = id;
         this.email = email;
     }
+
+    getID() {
+        return this.id;
+    }
+
+    getEmail() {
+        return this.email;
+    }
+
+    getRole() {
+        return 'Employee';
+    }
 }
 
-// creates an Engineer class off of the Teammate class
-class Manager extends Teammate {
+// creates an Engineer class off of the Employee class w/ function to create card
+class Manager extends Employee {
     constructor(teamMember, id, email, office) {
         super(teamMember, id, email);
         this.office = office;
+    }
+
+    getRole() {
+        return 'Manager';
     }
 
     getHTML() {
@@ -33,11 +49,19 @@ class Manager extends Teammate {
     }
 }
 
-// creates an Engineer class off of the Teammate class
-class Engineer extends Teammate {
+// creates an Engineer class off of the Employee class w/ function to create card
+class Engineer extends Employee {
     constructor(teamMember, id, email, github) {
         super(teamMember, id, email);
         this.github = github;
+    }
+
+    getRole() {
+        return 'Engineer'
+    }
+
+    getGithub() {
+        return this.github;
     }
 
     getHTML() {
@@ -53,11 +77,19 @@ class Engineer extends Teammate {
     }
 }
 
-// creates an Intern class off of the Teammate class
-class Intern extends Teammate {
+// creates an Intern class off of the Employee class w/ function to create card
+class Intern extends Employee {
     constructor(teamMember, id, email, school) {
         super(teamMember, id, email);
         this.school = school;
+    }
+
+    getSchool() {
+        return this.school;
+    }
+
+    getRole() {
+        return 'Intern'
     }
 
     getHTML() {
@@ -78,6 +110,7 @@ function writeHTML(fileName, data) {
     fs.writeFileSync(`team.html`, data);
 }
 
+//function to ask prompts that will create an manager
 function createManager() {
     inquirer.prompt([
         {
@@ -108,6 +141,7 @@ function createManager() {
     });
 }
 
+//function that prompts users to add another engineer, intern, or end which will initiate the file creation
 function anotherOne() {
     inquirer.prompt([
         {
@@ -128,6 +162,7 @@ function anotherOne() {
     })
 }
 
+//function to ask prompts that will create an engineer
 function addEngineer() {
     inquirer.prompt([
         {
@@ -158,6 +193,7 @@ function addEngineer() {
     })
 }
 
+//function to ask prompts that will create an intern
 function addIntern() {
     inquirer.prompt([
         {
