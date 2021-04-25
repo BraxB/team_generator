@@ -43,7 +43,7 @@ My professor, Stanley, as well as my tutor, Alistair, for teaching me all about 
 
 <a id='Tests'></a>
 
-Tests not included yet.
+Tests using Jest can be found in the tests directory. These can be run by using the 'npm test' command
 
 ## Questions
 
