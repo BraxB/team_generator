@@ -9,8 +9,8 @@ const inquirer = require('inquirer');
 const team = [];
 
 // // TODO: Create a function to write HTML file
-function writeHTML(fileName, data) {
-    fs.writeFileSync(fileName, data);
+function writeHTML(path, data) {
+    fs.writeFileSync(path, data);
 }
 
 //function to ask prompts that will create an manager
@@ -58,7 +58,7 @@ function anotherOne() {
         if (answers.menu === 'The whole gang is here') {
             let teamHTML = team.map(teamMember => {return teamMember.getHTML()});
             formattedHTML = teamHTML.join("");
-            let fileName = 'Team.html';
+            let fileName = `./output/Team.html`;
             let data = `
 <!DOCTYPE html>
     <html>
