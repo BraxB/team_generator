@@ -33,6 +33,9 @@ This project taught me the fun of using classes and sublcasses!
 2. Answer all prompts to create team members
 3. When you have all team members created, select "the gang's all here" and your html should be created
 
+![Screenshot of final product](./output/output.png)
+[Video Tutorial](https://drive.google.com/file/d/1HFk81Gk49wW_Vihw633sssB8UG_nVv8Y/view)
+
 ## Contributing
 
 <a id='Contributing'></a>
