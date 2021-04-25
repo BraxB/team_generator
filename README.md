@@ -1,9 +1,8 @@
-
 # Team Generator [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-sa/4.0/)
 
 ## Description
 
-I wanted to create a way to easily manage teams and create an HTML showing the structure of my team. 
+I wanted to create a way to easily manage teams and create an HTML showing the structure of my team.
 It takes the hassle out of team management.
 This project taught me the fun of using classes and sublcasses!
 
@@ -23,13 +22,16 @@ This project taught me the fun of using classes and sublcasses!
 
 <a id='Installation'></a>
 
-1. Download the repo to your local machine, 2. Run npm install to get any necessary dependencies
+1. Download the repo to your local machine
+2. Run npm install to get any necessary dependencies
 
 ## Usage
 
 <a id='Usage'></a>
 
-1. Run the code in your terminal using node index.js, 2. Answer all prompts to create team members, 3. When you have all team members created, select "the gang's all here" and your html should be created
+1. Run the code in your terminal using node index.js
+2. Answer all prompts to create team members
+3. When you have all team members created, select "the gang's all here" and your html should be created
 
 ## Contributing
 
@@ -49,7 +51,7 @@ Tests not included yet.
 
 Email: Braxb92@gmail.com
 
-Github: [Installation](https://github.com/BraxB/)
+Github: [https://github.com/BraxB/](https://github.com/BraxB/)
 
 ## License
 
